@@ -57,6 +57,8 @@ static int probe_finished = 0;
 
 #define J5_100_OHM_VALUE    0xECEC0001
 
+#include <linux/i2c/ist30xxc.h>
+
 #define MAX_ERR_CNT			(100)
 #define EVENT_TIMER_INTERVAL		(HZ * timer_period_ms / 1000)
 u32 event_ms = 0, timer_ms = 0;
@@ -650,6 +652,12 @@ static int check_valid_coord(u32 *msg, int cnt)
 	return 0;
 }
 
+u64 last_input_time = 0;
+inline u64 get_last_input_time() {
+	return last_input_time;
+}
+
+
 static void report_input_data(struct ist30xx_data *data, int finger_counts,
 		int key_counts)
 {
@@ -704,6 +712,7 @@ static void report_input_data(struct ist30xx_data *data, int finger_counts,
 	data->irq_err_cnt = 0;
 	data->scan_retry = 0;
 
+        last_input_time = ktime_to_us(ktime_get());
 	input_sync(data->input_dev);
 }
 
