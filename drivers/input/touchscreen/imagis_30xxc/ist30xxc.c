@@ -453,6 +453,7 @@ void print_tsp_event(struct ist30xx_data *data, finger_info *finger)
 	press = PRESSED_FINGER(data->t_status, finger->bit_field.id);
 
 	if (press) {
+                current_time = ktime_to_us(ktime_get());
 		if (tsp_touched[idx] == false) {
 			/* touch down */
 			data->touch_pressed_num++;
@@ -464,7 +465,6 @@ void print_tsp_event(struct ist30xx_data *data, finger_info *finger)
 			tsp_noti("%s%d\n", TOUCH_DOWN_MESSAGE, finger->bit_field.id);
 #endif
 
-		current_time = ktime_to_us(ktime_get());
 			if (data->dt2w_enable && screen_is_off && finger->bit_field.id == 1) {
 				if (current_time - last_input_time > 350000) {
 					data->dt2w_count = 0;
@@ -487,7 +487,7 @@ void print_tsp_event(struct ist30xx_data *data, finger_info *finger)
 				last_x = finger->bit_field.x;
 				last_y = finger->bit_field.y;
 				tsp_noti("count is %u\n", data->dt2w_count);
-				last_input_time = current_time;
+				
 			}
 			tsp_touched[idx] = true;
 		} else {
@@ -501,6 +501,7 @@ void print_tsp_event(struct ist30xx_data *data, finger_info *finger)
 
 		data->lx = finger->bit_field.x;
 		data->ly = finger->bit_field.y;
+                last_input_time = current_time
 	} else {
 		if (tsp_touched[idx] == true) {
 			/* touch up */
