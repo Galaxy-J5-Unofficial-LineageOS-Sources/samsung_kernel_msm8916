@@ -533,6 +533,8 @@ struct ist30xx_data {
 #ifdef USE_TSP_TA_CALLBACKS
 	struct tsp_callbacks	callbacks;
 #endif
+    bool dt2w_enable;
+	u32 dt2w_count;
 };
 
 extern struct mutex ist30xx_mutex;
