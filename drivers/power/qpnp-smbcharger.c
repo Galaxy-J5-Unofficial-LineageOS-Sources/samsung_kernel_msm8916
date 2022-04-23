@@ -1459,6 +1459,9 @@ static void smbchg_parallel_usb_enable(struct smbchg_chip *chip)
 		goto disable_parallel;
 	}
 
+        power_supply_set_voltage_limit(chip->usb_psy,
+			(chip->vfloat_mv + 50) * 1000);
+
 	current_limit_ma = smbchg_get_aicl_level_ma(chip);
 	if (current_limit_ma <= 0)
 		goto disable_parallel;
@@ -2911,11 +2914,15 @@ static int smbchg_hw_init(struct smbchg_chip *chip)
 	/* set the float voltage */
 	if (chip->vfloat_mv != -EINVAL) {
 		rc = smbchg_float_voltage_set(chip, chip->vfloat_mv);
-		if (rc < 0) {
-			dev_err(chip->dev,
-				"Couldn't set float voltage rc = %d\n", rc);
+		if (rc)
+		dev_err(chip->dev, "Couldn't set float voltage rc = %d\n", rc);
+                else {
+                    chip->vfloat_mv = vfloat_mv;
+		power_supply_set_voltage_limit(chip->usb_psy,
+				chip->vfloat_mv * 1000);
+	        }
 			return rc;
-		}
+		
 		pr_smb(PR_STATUS, "set vfloat to %d\n", chip->vfloat_mv);
 	}
 
