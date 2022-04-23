@@ -113,8 +113,8 @@
 			battery,ovp_uvlo_check_type = <3>; /* SEC_BATTERY_OVP_UVLO_CHGPOLLING */
 			battery,full_check_type = <7>; /* SEC_BATTERY_FULLCHARGED_FG_CURRENT */
 
-			battery,input_current_limit = <1550 500 500 1550 500 1550 1550 500 500 1550 650 1550 1550 500 1550 500 700 1550 500 1550 1550 500 500>;
-			battery,fast_charging_current = <2000 0 500 2000 500 2000 2000 500 0 2000 750 2000 2000 (-1) 2000 500 700 2000 500 2000 2000 0 0>;
+			battery,input_current_limit = <2000 500 500 2000 500 2000 2000 500 500 2000 650 2000 2000 500 2000 500 700 2000 500 2000 2000 500 500>;
+			battery,fast_charging_current = <2050 0 500 2050 500 2050 2050 500 0 2050 750 2050 2050 (-1) 2050 500 700 2050 500 2050 2050 0 0>;
 			battery,full_check_current_1st = <200 0 200 200 200 200 200 200 0 200 200 200 200 0 200 200 200 200 200 200 200 0 0>;
 			battery,full_check_current_2nd = <100 0 100 100 100 100 100 100 0 100 100 100 100 0 100 100 100 100 100 100 100 0 0>;
 		};
