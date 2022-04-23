@@ -2918,7 +2918,7 @@ static int smbchg_hw_init(struct smbchg_chip *chip)
 		dev_err(chip->dev, "Couldn't set float voltage rc = %d\n", rc);
                 else {
                     chip->vfloat_mv = vfloat_mv;
-		power_supply_set_voltage_limit(chip->usb_psy,
+		    power_supply_set_voltage_limit(chip->usb_psy,
 				chip->vfloat_mv * 1000);
 	        }
 			return rc;
