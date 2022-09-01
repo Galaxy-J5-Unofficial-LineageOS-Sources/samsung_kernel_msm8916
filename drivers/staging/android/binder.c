@@ -2915,7 +2915,7 @@ static void binder_transaction(struct binder_proc *proc,
 			goto err_dead_binder;
 		}
 		binder_inner_proc_lock(target_proc);
-		target_proc->tmp_ref++;
+		atomic_inc(&target_proc->tmp_ref);
 		binder_inner_proc_unlock(target_proc);
 		binder_node_unlock(target_node);
 		if (security_binder_transaction(proc->tsk,
