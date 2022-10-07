@@ -710,12 +710,14 @@ __SYSCALL(__NR_memfd_create, sys_memfd_create)
 #undef __NR_syscalls
 #define __NR_syscalls 280
 #define __NR_membarrier 282
+#define __NR_membarrier 280
 __SYSCALL(__NR_membarrier, sys_membarrier)
-#define __NR_pidfd_send_signal 424
+#define __NR_pidfd_send_signal 281
 __SYSCALL(__NR_pidfd_send_signal, sys_pidfd_send_signal)
- 
+#define __NR_pidfd_open 282
+__SYSCALL(__NR_pidfd_open, sys_pidfd_open)
 #undef __NR_syscalls
-#define __NR_syscalls 425
+#define __NR_syscalls 283
 
 /*
  * All syscalls below here should go away really,
